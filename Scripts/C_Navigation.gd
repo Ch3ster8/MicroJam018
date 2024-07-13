@@ -6,6 +6,7 @@ extends Area2D
 var cooldown = 0.5
 var timer = 0
 var lastDir
+var firstPosition
 var c_movement
 
 #Each cardinal direction
@@ -22,6 +23,7 @@ func _ready():
 	for x in get_children():
 		if x is RayCast2D:
 			raycasts.append(x)
+	firstPosition = global_position
 func _process(delta):
 	if timer > 0:
 		timer -= delta
@@ -40,25 +42,21 @@ func Navigate(interest : Vector2):
 		for x in raycasts.size():
 			if raycasts[x].is_colliding():
 				dangers[x] = 6
-				if x-1 < dangers.size():
+				'''if x-1 < dangers.size():
 					if dangers[x-1] < 6:
 						dangers[x-1] = 3
 				if x+1 < dangers.size():
 					if dangers[x+1] < 6:
-						dangers[x+1] = 3
+						dangers[x+1] = 3'''
 		#looping through the interests to minus the dangers, the largest value after this step is the direction we will move in
-		print(str(interests) + "f")
-		print(str(dangers) + "s")
 		for x in interests.size():
 			interests[x] -= dangers[x]
 			if interests[x] < 0:
 				interests[x] = 0
-		print(interests)
 		#Getting the final direction
 		var finalDirection = Vector2.ZERO
 		for x in interests.size():
 			finalDirection += directions[x] * interests[x]
-		print(finalDirection)
 		#Making the final direction rounded by the steering power variable
 		var steering_direction = finalDirection - c_movement.velocity
 		finalDirection = c_movement.velocity + steering_direction * steering_power
@@ -75,18 +73,14 @@ func Navigate(interest : Vector2):
 			if raycasts[x].is_colliding():
 				dangers[x] = 6
 		#looping through the interests to minus the dangers, the largest value after this step is the direction we will move in
-		print(str(interests) + "f")
-		print(str(dangers) + "s")
 		for x in interests.size():
 			interests[x] -= dangers[x]
 			if interests[x] < 0:
 				interests[x] = 0
-		print(interests)
 		#Getting the final direction
 		var finalDirection = Vector2.ZERO
 		for x in interests.size():
 			finalDirection += directions[x] * interests[x]
-		print(finalDirection)
 		#Making the final direction rounded by the steering power variable
 		var steering_direction = finalDirection - c_movement.velocity
 		finalDirection = c_movement.velocity + steering_direction * steering_power
@@ -98,6 +92,9 @@ func randomDir():
 	if timer <= 0:
 		timer = cooldown
 		lastDir = Vector2(randi_range(-1, 1), randi_range(-1, 1))
-		return lastDir
+		if global_position.distance_to(firstPosition) > 50:
+			return global_position.direction_to(firstPosition)
+		else:
+			return lastDir
 	else:
 		return lastDir

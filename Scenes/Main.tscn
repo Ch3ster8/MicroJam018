@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://keqjs3o80knt"]
+[gd_scene load_steps=14 format=3 uid="uid://keqjs3o80knt"]
 
 [ext_resource type="PackedScene" uid="uid://dpehyqo2s76ty" path="res://Scenes/billy.tscn" id="1_epkv2"]
 [ext_resource type="Texture2D" uid="uid://cc0dth18tc2yw" path="res://Assets/PNG/1_game_background/1_game_background.png" id="1_xmh6u"]
 [ext_resource type="PackedScene" uid="uid://b3ckv3i35sqcr" path="res://Scenes/IngameUI.tscn" id="3_2dhso"]
 [ext_resource type="PackedScene" uid="uid://b1n228j0jdnke" path="res://Scenes/angler.tscn" id="4_c7uk2"]
+[ext_resource type="PackedScene" uid="uid://c4uy7qtcxydto" path="res://Scenes/clownfish.tscn" id="5_jmvxa"]
+[ext_resource type="Script" path="res://Scripts/Placement.gd" id="6_dyjll"]
+[ext_resource type="AudioStream" uid="uid://71vlo78ktrh1" path="res://Assets/Monkeys Spinning Monkeys.mp3" id="7_lkmmm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pu5dn"]
 vertices = PackedVector2Array(5317, -3462, 5324, 2448, -5206, 2431, -5211, -3467)
@@ -12,57 +15,73 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-5222, -3478, 5327, -34
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_41xae"]
-size = Vector2(151.245, 6261)
+size = Vector2(303.622, 12666.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uj7px"]
-size = Vector2(151.245, 6261)
+size = Vector2(252.622, 13070.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvvxm"]
-size = Vector2(10869, 146.5)
+size = Vector2(22177.5, 146.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8k5v"]
-size = Vector2(10869, 146.5)
+size = Vector2(23189.5, 146.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_852qm"]
+size = Vector2(16709, 7303)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(56, -508)
-scale = Vector2(5.5, 5.5)
+position = Vector2(6236.44, 2968.5)
+scale = Vector2(11.938, 11.938)
 texture = ExtResource("1_xmh6u")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_pu5dn")
 
-[node name="Billy" parent="." node_paths=PackedStringArray("progress") instance=ExtResource("1_epkv2")]
+[node name="Billy" parent="." node_paths=PackedStringArray("progress", "scoreLabel") instance=ExtResource("1_epkv2")]
 progress = NodePath("../CanvasLayer/Control/TextureProgressBar")
+scoreLabel = NodePath("../CanvasLayer/Control/Score")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_2dhso")]
-
-[node name="Angler" parent="." instance=ExtResource("4_c7uk2")]
-position = Vector2(-1144, 12)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(3450, -541)
+position = Vector2(14456, 3592)
 shape = SubResource("RectangleShape2D_41xae")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(-3317, -502)
+position = Vector2(-2586, 2927)
 shape = SubResource("RectangleShape2D_uj7px")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(206, 1030)
+position = Vector2(7360.25, 6537)
 shape = SubResource("RectangleShape2D_dvvxm")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(130, -2010)
+position = Vector2(6366, -950)
 shape = SubResource("RectangleShape2D_j8k5v")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("6_dyjll")
+anglerFish = ExtResource("4_c7uk2")
+clownFish = ExtResource("5_jmvxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5920.5, 2802.5)
+shape = SubResource("RectangleShape2D_852qm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_lkmmm")
+volume_db = -50.0
+autoplay = true
+max_distance = 1e+09
 
 [editable path="CanvasLayer"]

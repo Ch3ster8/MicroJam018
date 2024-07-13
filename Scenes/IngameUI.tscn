@@ -1,14 +1,28 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3ckv3i35sqcr"]
+[gd_scene load_steps=15 format=3 uid="uid://b3ckv3i35sqcr"]
 
 [ext_resource type="Texture2D" uid="uid://dy8nig55q7tvn" path="res://Assets/ProgressBar/32x32/32x32 circle bar over.png" id="1_vi8vy"]
-[ext_resource type="Texture2D" uid="uid://dpqa254h1jdr7" path="res://Assets/ProgressBar/32x32/32x32 circle bar progress blue.png" id="2_out68"]
-[ext_resource type="Texture2D" uid="uid://di7ebjc8t3ws5" path="res://Assets/BubbleAnimation1.png" id="3_nkhhq"]
-[ext_resource type="Texture2D" uid="uid://dv7qdl2hqiqu" path="res://Assets/BubbleAnimation2.png" id="4_biimc"]
-[ext_resource type="Texture2D" uid="uid://xug3t57fx60t" path="res://Assets/BubbleAnimation3.png" id="5_36w5y"]
-[ext_resource type="Texture2D" uid="uid://bphf6ikmoagts" path="res://Assets/BubbleAnimation4.png" id="6_0v64e"]
-[ext_resource type="Texture2D" uid="uid://d4d5wea6jm3ca" path="res://Assets/BubbleAnimation5.png" id="7_gv2k5"]
-[ext_resource type="Texture2D" uid="uid://c1yttjdwv351a" path="res://Assets/BubbleAnimation6.png" id="8_m8cvq"]
+[ext_resource type="Texture2D" uid="uid://cbvhlnv3xvhg0" path="res://Assets/ProgressBar/32x32/32x32 circle bar progress red.png" id="2_7huhd"]
+[ext_resource type="Theme" uid="uid://bb6vwl0h1flws" path="res://FlatUI4/kenneyUI-blue.tres" id="5_ic01h"]
 [ext_resource type="Script" path="res://Scripts/bubbles.gd" id="9_j0syp"]
+[ext_resource type="Texture2D" uid="uid://ri0nsg0ddcmi" path="res://AdamsArt/heart.png" id="10_q01i1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8cydl"]
+load_path = "res://.godot/imported/BubbleAnimation1.png-b1364413586e5e9f15d881482e184620.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_80h8a"]
+load_path = "res://.godot/imported/BubbleAnimation2.png-7e7a953de0b50eeefd627039d8901674.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6fjty"]
+load_path = "res://.godot/imported/BubbleAnimation3.png-753553b58d4fa4fe7075d9f043f4a478.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dq18q"]
+load_path = "res://.godot/imported/BubbleAnimation4.png-f900a9dbff1b4513cead92b904720091.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_coos5"]
+load_path = "res://.godot/imported/BubbleAnimation5.png-39f5d84864f0249cf2ad6c24dc512d35.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k2iyo"]
+load_path = "res://.godot/imported/BubbleAnimation6.png-28c41d675d51850cc3cc928731bf76e7.ctex"
 
 [sub_resource type="Animation" id="Animation_o5vd1"]
 resource_name = "Bubbles"
@@ -24,7 +38,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("3_nkhhq"), ExtResource("4_biimc"), ExtResource("5_36w5y"), ExtResource("6_0v64e"), ExtResource("7_gv2k5"), ExtResource("8_m8cvq")]
+"values": [SubResource("CompressedTexture2D_8cydl"), SubResource("CompressedTexture2D_80h8a"), SubResource("CompressedTexture2D_6fjty"), SubResource("CompressedTexture2D_dq18q"), SubResource("CompressedTexture2D_coos5"), SubResource("CompressedTexture2D_k2iyo")]
 }
 
 [sub_resource type="Animation" id="Animation_41s0n"]
@@ -39,7 +53,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_nkhhq")]
+"values": [SubResource("CompressedTexture2D_8cydl")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xfxhk"]
@@ -69,21 +83,54 @@ color = Color(0.223529, 1, 1, 0.235294)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
 layout_mode = 1
-offset_right = 32.0
+anchors_preset = -1
+anchor_left = 0.528
+anchor_right = 0.528
+offset_left = -80.256
+offset_right = -48.256
 offset_bottom = 32.0
+grow_horizontal = 2
 scale = Vector2(3, 3)
 value = 1.0
 fill_mode = 5
 texture_over = ExtResource("1_vi8vy")
-texture_progress = ExtResource("2_out68")
+texture_progress = ExtResource("2_7huhd")
+
+[node name="Score" type="Label" parent="Control"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -58.0
+offset_top = 95.0
+offset_right = 58.0
+offset_bottom = 118.0
+grow_horizontal = 2
+theme = ExtResource("5_ic01h")
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 30.0
+offset_right = 20.0
+offset_bottom = 69.9999
+grow_horizontal = 2
+texture = ExtResource("10_q01i1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_nkhhq")
+texture = SubResource("CompressedTexture2D_8cydl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
 libraries = {

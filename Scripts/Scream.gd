@@ -2,6 +2,9 @@ extends Area2D
 var life
 var cantMove = false
 var bodies = []
+@onready var animPlayer = $AnimatedSprite2D/AnimationPlayer
+func  _ready():
+	animPlayer.play("default")
 func _physics_process(delta):
 	if life > 0:
 		life -= delta

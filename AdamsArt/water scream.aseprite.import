@@ -1,0 +1,18 @@
+[remap]
+
+importer="aseprite_wizard.plugin"
+type="SpriteFrames"
+uid="uid://ccrcggjdc4g45"
+path="res://.godot/imported/water scream.aseprite-6721181ad8278d2f8a1c1ba88e439b28.res"
+
+[deps]
+
+source_file="res://AdamsArt/water scream.aseprite"
+dest_files=["res://.godot/imported/water scream.aseprite-6721181ad8278d2f8a1c1ba88e439b28.res"]
+
+[params]
+
+split_layers=false
+exclude_layers_pattern=""
+only_visible_layers=true
+sheet_type="Strip"
