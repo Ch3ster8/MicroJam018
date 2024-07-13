@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://dpehyqo2s76ty"]
+
+[ext_resource type="Script" path="res://Scripts/Billy.gd" id="1_d4kbi"]
+[ext_resource type="PackedScene" uid="uid://bnvl2ljv8ep7a" path="res://Scenes/scream.tscn" id="2_bak0x"]
+[ext_resource type="PackedScene" uid="uid://dtc11lmi1rgsx" path="res://Scenes/movement.tscn" id="3_0rkyu"]
+[ext_resource type="SpriteFrames" uid="uid://da3ql7f8skp0i" path="res://AdamsArt/Sprite-0001.aseprite" id="3_hcexu"]
+[ext_resource type="Texture2D" uid="uid://vrevr2eq2ish" path="res://Assets/BiteAnimation1.png" id="4_o8b5u"]
+
+[sub_resource type="Animation" id="Animation_5as61"]
+length = 0.714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0952381, 0.190476, 0.357143, 0.428571, 0.52381, 0.619048, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhfy5"]
+_data = {
+"default": SubResource("Animation_5as61")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4urga"]
+size = Vector2(322, 142)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3rxx"]
+size = Vector2(229, 228)
+
+[sub_resource type="Animation" id="Animation_jniqx"]
+resource_name = "Bite"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_m2eot"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1.03526),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsmdi"]
+_data = {
+"Bite": SubResource("Animation_jniqx"),
+"RESET": SubResource("Animation_m2eot")
+}
+
+[node name="Billy" type="CharacterBody2D" node_paths=PackedStringArray("biteArea", "biteAnim") groups=["billy"]]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_d4kbi")
+biteArea = NodePath("BiteArea")
+biteAnim = NodePath("Sprite2D/AnimationPlayer")
+scream = ExtResource("2_bak0x")
+
+[node name="BillySprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.35559, 2.35559)
+sprite_frames = ExtResource("3_hcexu")
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BillySprite"]
+libraries = {
+"": SubResource("AnimationLibrary_dhfy5")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(14, 36)
+shape = SubResource("RectangleShape2D_4urga")
+
+[node name="Movement" parent="." instance=ExtResource("3_0rkyu")]
+acceleration = 30.0
+deceleration = 5.0
+dashCooldown = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.2, 0.2)
+
+[node name="BiteArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
+position = Vector2(222, 8)
+shape = SubResource("RectangleShape2D_k3rxx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(214, 8)
+scale = Vector2(13.8125, 13.8125)
+texture = ExtResource("4_o8b5u")
+hframes = 5
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_vsmdi")
+}
+speed_scale = 2.0

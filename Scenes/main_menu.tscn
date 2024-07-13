@@ -1,0 +1,204 @@
+[gd_scene load_steps=7 format=3 uid="uid://h13acpcaxoe6"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_t3spk"]
+[ext_resource type="Texture2D" uid="uid://d00ws7wljnit4" path="res://FlatUI4/UIpack_vector.svg" id="2_cnyfk"]
+[ext_resource type="PackedScene" uid="uid://keqjs3o80knt" path="res://Scenes/Main.tscn" id="2_i553d"]
+[ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://FlatUI4/kenneyUI-red.tres" id="2_udnh7"]
+[ext_resource type="Theme" uid="uid://h1f7iqhh7ycb" path="res://FlatUI4/kenneyUI-yellow.tres" id="2_xwp4e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3pobn"]
+font_size = 26
+
+[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("credits", "settings", "volumeNum")]
+script = ExtResource("1_t3spk")
+startScene = ExtResource("2_i553d")
+credits = NodePath("Control/CreditsScreen")
+settings = NodePath("Control/SettingsScreen")
+volumeNum = NodePath("Control/SettingsScreen/VolumeNum")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.162
+offset_top = 240.0
+offset_right = 44.1622
+offset_bottom = 282.251
+grow_horizontal = 2
+theme = ExtResource("2_udnh7")
+text = "Start"
+
+[node name="Settings" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.162
+offset_top = 300.0
+offset_right = 44.1622
+offset_bottom = 342.251
+grow_horizontal = 2
+theme = ExtResource("2_udnh7")
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.162
+offset_top = 360.0
+offset_right = 44.1622
+offset_bottom = 402.251
+grow_horizontal = 2
+theme = ExtResource("2_udnh7")
+text = "Quit"
+
+[node name="Credits" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.3242
+offset_top = -42.251
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_udnh7")
+text = "Credits
+"
+
+[node name="CreditsScreen" type="NinePatchRect" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.0
+offset_top = -219.0
+offset_right = 189.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("2_cnyfk")
+region_rect = Rect2(364, 310, 100, 100)
+
+[node name="Label" type="Label" parent="Control/CreditsScreen"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 382.0
+theme = ExtResource("2_udnh7")
+text = "Art:
+     ADAM
+
+Code:
+     Cameron
+
+Shoutout to my artist, he had no reason to help me but he still did, very appreciative of him."
+label_settings = SubResource("LabelSettings_3pobn")
+autowrap_mode = 3
+
+[node name="Credits" type="Button" parent="Control/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -107.324
+offset_bottom = 42.251
+grow_horizontal = 0
+theme = ExtResource("2_xwp4e")
+text = "Close
+"
+
+[node name="SettingsScreen" type="NinePatchRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.0
+offset_top = -219.0
+offset_right = 189.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("2_cnyfk")
+region_rect = Rect2(364, 310, 100, 100)
+
+[node name="Settings" type="Button" parent="Control/SettingsScreen"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -107.324
+offset_bottom = 42.251
+grow_horizontal = 0
+theme = ExtResource("2_xwp4e")
+text = "Close
+"
+
+[node name="WindowButton" type="OptionButton" parent="Control/SettingsScreen"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -62.5
+offset_right = 201.0
+offset_bottom = -19.5
+grow_vertical = 2
+theme = ExtResource("2_xwp4e")
+item_count = 2
+selected = 1
+popup/item_0/text = "FullScreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+
+[node name="VolumeSlider" type="HSlider" parent="Control/SettingsScreen"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -19.5
+offset_right = 153.0
+offset_bottom = 22.5
+grow_vertical = 2
+theme = ExtResource("2_xwp4e")
+value = 50.0
+
+[node name="VolumeNum" type="Label" parent="Control/SettingsScreen"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 190.0
+offset_right = 201.0
+offset_bottom = 213.0
+theme = ExtResource("2_xwp4e")
+text = "50"
+
+[connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Control/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Control/CreditsScreen/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Control/SettingsScreen/Settings" to="." method="_on_settings_pressed"]
+[connection signal="item_selected" from="Control/SettingsScreen/WindowButton" to="." method="_on_window_button_item_selected"]
+[connection signal="value_changed" from="Control/SettingsScreen/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

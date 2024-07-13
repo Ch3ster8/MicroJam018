@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://b3ckv3i35sqcr"]
+
+[ext_resource type="Texture2D" uid="uid://dy8nig55q7tvn" path="res://Assets/ProgressBar/32x32/32x32 circle bar over.png" id="1_vi8vy"]
+[ext_resource type="Texture2D" uid="uid://dpqa254h1jdr7" path="res://Assets/ProgressBar/32x32/32x32 circle bar progress blue.png" id="2_out68"]
+[ext_resource type="Texture2D" uid="uid://di7ebjc8t3ws5" path="res://Assets/BubbleAnimation1.png" id="3_nkhhq"]
+[ext_resource type="Texture2D" uid="uid://dv7qdl2hqiqu" path="res://Assets/BubbleAnimation2.png" id="4_biimc"]
+[ext_resource type="Texture2D" uid="uid://xug3t57fx60t" path="res://Assets/BubbleAnimation3.png" id="5_36w5y"]
+[ext_resource type="Texture2D" uid="uid://bphf6ikmoagts" path="res://Assets/BubbleAnimation4.png" id="6_0v64e"]
+[ext_resource type="Texture2D" uid="uid://d4d5wea6jm3ca" path="res://Assets/BubbleAnimation5.png" id="7_gv2k5"]
+[ext_resource type="Texture2D" uid="uid://c1yttjdwv351a" path="res://Assets/BubbleAnimation6.png" id="8_m8cvq"]
+[ext_resource type="Script" path="res://Scripts/bubbles.gd" id="9_j0syp"]
+
+[sub_resource type="Animation" id="Animation_o5vd1"]
+resource_name = "Bubbles"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_nkhhq"), ExtResource("4_biimc"), ExtResource("5_36w5y"), ExtResource("6_0v64e"), ExtResource("7_gv2k5"), ExtResource("8_m8cvq")]
+}
+
+[sub_resource type="Animation" id="Animation_41s0n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_nkhhq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xfxhk"]
+_data = {
+"Bubbles": SubResource("Animation_o5vd1"),
+"RESET": SubResource("Animation_41s0n")
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.223529, 1, 1, 0.235294)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(3, 3)
+value = 1.0
+fill_mode = 5
+texture_over = ExtResource("1_vi8vy")
+texture_progress = ExtResource("2_out68")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_nkhhq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
+libraries = {
+"": SubResource("AnimationLibrary_xfxhk")
+}
+script = ExtResource("9_j0syp")

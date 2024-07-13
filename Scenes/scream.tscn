@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnvl2ljv8ep7a"]
+
+[ext_resource type="Script" path="res://Scripts/Scream.gd" id="1_8q6vf"]
+[ext_resource type="Texture2D" uid="uid://vrevr2eq2ish" path="res://Assets/BiteAnimation1.png" id="2_on7eg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmn4t"]
+size = Vector2(88, 88)
+
+[node name="Scream" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_8q6vf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vmn4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5.5, 5.5)
+texture = ExtResource("2_on7eg")
+hframes = 5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
