@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/WinScreen.gd" id="2_sfw7a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m64b1"]
-font_size = 51
+font_size = 41
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -79,6 +79,7 @@ offset_bottom = 447.0
 grow_horizontal = 2
 text = "Snapper: 
 Pufferfish:
+Squid: 
 Jellyfish:
 Shark:
 Score:"

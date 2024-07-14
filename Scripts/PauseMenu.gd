@@ -42,6 +42,7 @@ func _on_quit_pressed():
 	Storage.basicFish = 0
 	Storage.pufferfish = 0
 	Storage.jellyfish = 0
+	Storage.squid = 0
 	Storage.shark = 0
 	Storage.score = 0
 	get_tree().paused = false

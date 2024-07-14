@@ -99,6 +99,7 @@ func die():
 	await blood.finished
 	Storage.basicFish = 0
 	Storage.pufferfish = 0
+	Storage.squid = 0
 	Storage.jellyfish = 0
 	Storage.shark = 0
 	Storage.score = 0
@@ -137,8 +138,12 @@ func updateChecklist(body):
 			score += 100
 			if Storage.shark < 1:
 				Storage.shark += 1
+		elif groups[0] == "squid":
+			score += 15
+			if Storage.squid < 3:
+				Storage.squid += 1
 		Storage.score = score
-		if Storage.basicFish >= 10 and Storage.pufferfish >= 5 and Storage.jellyfish >= 2 and Storage.shark >= 1:
+		if Storage.basicFish >= 10 and Storage.pufferfish >= 5 and Storage.jellyfish >= 2 and Storage.shark >= 1 and Storage.squid >=3:
 			AudioHandler.change_scene_to_file("res://Scenes/WinScreen.tscn")
 	var locked = {
 		"dash" : "",
@@ -160,8 +165,12 @@ func updateChecklist(body):
 	"+locked.scream+"RightClick:
 	   Scream"
 	checklist.text = "CheckList:
+		
+		
+		
 	Snapper: " + str(Storage.basicFish) +"/10
 	PufferFish: "  + str(Storage.pufferfish) +"/5
+	Squid: "  + str(Storage.squid) +"/3
 	Jellyfish: "  + str(Storage.jellyfish) +"/2
 	Shark: "  + str(Storage.shark) +"/1"
 	scoreLabel.text = "Score: " + str(score)

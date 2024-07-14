@@ -163,6 +163,7 @@ text = "CheckList:
 
 Snapper: 0/10
 PufferFish: 0/5
+Squid: 0/3
 Jellyfish: 0/2
 Shark: 0/1"
 label_settings = SubResource("LabelSettings_jinx7")

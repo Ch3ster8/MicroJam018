@@ -78,7 +78,7 @@ size = Vector2(1523.5, 1387.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_df15s"]
 radius = 685.047
 
-[node name="Squid" type="CharacterBody2D" node_paths=PackedStringArray("biteAnim", "bitearea") groups=["jellyfish"]]
+[node name="Squid" type="CharacterBody2D" node_paths=PackedStringArray("biteAnim", "bitearea") groups=["squid"]]
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_ren3p")
