@@ -9,34 +9,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncs8w"]
 size = Vector2(694.4, 203.2)
 
-[sub_resource type="Animation" id="Animation_0hqm8"]
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["swim"]
-}
-
 [sub_resource type="Animation" id="Animation_24jxm"]
 resource_name = "Bite"
 length = 6.72
@@ -112,6 +84,34 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_0hqm8"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["swim"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_txi4t"]
 _data = {
 "Bite": SubResource("Animation_24jxm"),
@@ -136,7 +136,6 @@ biteArea = NodePath("BiteArea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(37.6, 12.4)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ncs8w")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -169,7 +168,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
 position = Vector2(360.9, 14.4)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_223ne")
 
 [node name="BloodEffect" parent="." instance=ExtResource("5_yf4ay")]

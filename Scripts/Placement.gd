@@ -1,8 +1,9 @@
 extends Area2D
-@export var anglerFish : PackedScene
+@export var jellyfish : PackedScene
 @export var snapper : PackedScene
 @export var pufferFish : PackedScene
-@onready var fish := [anglerFish, snapper, snapper, snapper, pufferFish]
+@export var squid : PackedScene
+@onready var fish := [jellyfish, snapper, snapper, snapper, squid, pufferFish]
 
 func _ready():
 	for x in 35:
@@ -14,7 +15,11 @@ func _ready():
 		instant.position = get_placement_pos(global_position, get_child(0).get_shape().size, Vector2(50, 50), true)
 		add_child(instant)
 	for x in 2:
-		var instant = anglerFish.instantiate()
+		var instant = jellyfish.instantiate()
+		instant.position = get_placement_pos(global_position, get_child(0).get_shape().size, Vector2(50, 50), true)
+		add_child(instant)
+	for x in 3:
+		var instant = squid.instantiate()
 		instant.position = get_placement_pos(global_position, get_child(0).get_shape().size, Vector2(50, 50), true)
 		add_child(instant)
 	for x in 5:

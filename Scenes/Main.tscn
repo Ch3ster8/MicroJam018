@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://keqjs3o80knt"]
+[gd_scene load_steps=18 format=3 uid="uid://keqjs3o80knt"]
 
 [ext_resource type="PackedScene" uid="uid://dpehyqo2s76ty" path="res://Scenes/billy.tscn" id="1_epkv2"]
 [ext_resource type="Texture2D" uid="uid://bnve0r7cf7w6y" path="res://AdamsArt/IMG_0335.png" id="1_nf8ts"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Placement.gd" id="6_dyjll"]
 [ext_resource type="AudioStream" uid="uid://cjjf74alrl4gu" path="res://Assets/aquarium-sound-6891.mp3" id="7_3npyn"]
 [ext_resource type="PackedScene" uid="uid://dtvqap7kgu5mb" path="res://Scenes/pufferfish.tscn" id="7_ldgql"]
+[ext_resource type="PackedScene" uid="uid://rueyouihplty" path="res://Scenes/squid.tscn" id="8_3r2xc"]
 [ext_resource type="AudioStream" uid="uid://7xrpywt7po4r" path="res://Assets/the-sound-of-water-drops-21095.mp3" id="8_afbuu"]
 [ext_resource type="PackedScene" uid="uid://cerxux2a7u5tg" path="res://Scenes/shark.tscn" id="10_qkf63"]
 
@@ -93,9 +94,10 @@ shape = SubResource("RectangleShape2D_j8k5v")
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("6_dyjll")
-anglerFish = ExtResource("5_4ovcb")
+jellyfish = ExtResource("5_4ovcb")
 snapper = ExtResource("6_6d5go")
 pufferFish = ExtResource("7_ldgql")
+squid = ExtResource("8_3r2xc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false

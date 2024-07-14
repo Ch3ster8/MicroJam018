@@ -5,6 +5,7 @@
 
 [sub_resource type="Animation" id="Animation_sv7k5"]
 resource_name = "fade"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -12,7 +13,7 @@ tracks/0/path = NodePath("CanvasLayer/Control/ColorRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
@@ -42,7 +43,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0, 0, 0, 0)
 top_level = true
 z_index = 4
 layout_mode = 1
