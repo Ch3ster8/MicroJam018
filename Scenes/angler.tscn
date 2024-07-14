@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1n228j0jdnke"]
+[gd_scene load_steps=13 format=3 uid="uid://b1n228j0jdnke"]
 
 [ext_resource type="Script" path="res://Scripts/fish.gd" id="1_vifd5"]
 [ext_resource type="Texture2D" uid="uid://dov7p2fw2ons1" path="res://Assets/Bubble the Fun/Fish/PNG/Anglar Fish 1.png" id="2_oihyo"]
 [ext_resource type="PackedScene" uid="uid://dtc11lmi1rgsx" path="res://Scenes/movement.tscn" id="3_3gv6i"]
 [ext_resource type="PackedScene" uid="uid://2j6h8mx3qiba" path="res://Scenes/navigation.tscn" id="4_am187"]
 [ext_resource type="Texture2D" uid="uid://vrevr2eq2ish" path="res://Assets/BiteAnimation1.png" id="5_a04p4"]
+[ext_resource type="PackedScene" uid="uid://c3s5a1806wp1f" path="res://Scenes/blood_effect.tscn" id="6_2od5j"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4urga"]
-size = Vector2(149, 155)
+[sub_resource type="CircleShape2D" id="CircleShape2D_f23iu"]
+radius = 94.0332
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j12c6"]
 size = Vector2(1523.5, 1387.5)
@@ -52,7 +53,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lajs"]
 size = Vector2(229, 152)
 
-[node name="Angler" type="CharacterBody2D" node_paths=PackedStringArray("biteAnim")]
+[node name="Angler" type="CharacterBody2D" node_paths=PackedStringArray("biteAnim") groups=["basicfish"]]
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_vifd5")
@@ -60,7 +61,7 @@ biteAnim = NodePath("Sprite2D/AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 17.5)
-shape = SubResource("RectangleShape2D_4urga")
+shape = SubResource("CircleShape2D_f23iu")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_oihyo")
@@ -69,9 +70,6 @@ texture = ExtResource("2_oihyo")
 speed = 300
 acceleration = 30.0
 deceleration = 5.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.2, 0.2)
 
 [node name="Navigation" parent="." node_paths=PackedStringArray("user") instance=ExtResource("4_am187")]
 user = NodePath("..")
@@ -101,5 +99,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
 position = Vector2(206.5, 16)
 shape = SubResource("RectangleShape2D_1lajs")
+
+[node name="BloodEffect" parent="." instance=ExtResource("6_2od5j")]
 
 [connection signal="body_entered" from="BiteArea" to="." method="_on_bite_area_body_entered"]

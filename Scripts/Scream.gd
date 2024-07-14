@@ -12,6 +12,7 @@ func _physics_process(delta):
 		queue_free()
 	global_position += transform.x * 15
 func _on_body_entered(body):
+	body.stunned(2.3)
 	body.movement.canMove = false
 	body.canBite = false
 	body.biteTimer = body.biteCooldown

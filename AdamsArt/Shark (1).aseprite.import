@@ -1,0 +1,18 @@
+[remap]
+
+importer="aseprite_wizard.plugin"
+type="SpriteFrames"
+uid="uid://cny8q87a1h22x"
+path="res://.godot/imported/Shark (1).aseprite-22f144aca258d079a3f67ebaf82d802c.res"
+
+[deps]
+
+source_file="res://AdamsArt/Shark (1).aseprite"
+dest_files=["res://.godot/imported/Shark (1).aseprite-22f144aca258d079a3f67ebaf82d802c.res"]
+
+[params]
+
+split_layers=false
+exclude_layers_pattern=""
+only_visible_layers=true
+sheet_type="Strip"

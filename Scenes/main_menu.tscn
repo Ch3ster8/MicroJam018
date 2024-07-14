@@ -1,20 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://h13acpcaxoe6"]
+[gd_scene load_steps=10 format=3 uid="uid://h13acpcaxoe6"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_t3spk"]
 [ext_resource type="Texture2D" uid="uid://d00ws7wljnit4" path="res://FlatUI4/UIpack_vector.svg" id="2_cnyfk"]
 [ext_resource type="PackedScene" uid="uid://keqjs3o80knt" path="res://Scenes/Main.tscn" id="2_i553d"]
 [ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://FlatUI4/kenneyUI-red.tres" id="2_udnh7"]
 [ext_resource type="Theme" uid="uid://h1f7iqhh7ycb" path="res://FlatUI4/kenneyUI-yellow.tres" id="2_xwp4e"]
+[ext_resource type="Texture2D" uid="uid://bnve0r7cf7w6y" path="res://AdamsArt/IMG_0335.png" id="3_e76ay"]
+[ext_resource type="AudioStream" uid="uid://71vlo78ktrh1" path="res://Assets/Monkeys Spinning Monkeys.mp3" id="6_1qvxf"]
+[ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://FlatUI4/kenneyUI.tres" id="7_cd8la"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3pobn"]
-font_size = 26
+font_size = 44
 
-[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("credits", "settings", "volumeNum")]
+[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("credits", "settings", "volumeNum", "windowButton", "volumeSlider")]
+process_mode = 3
 script = ExtResource("1_t3spk")
 startScene = ExtResource("2_i553d")
 credits = NodePath("Control/CreditsScreen")
 settings = NodePath("Control/SettingsScreen")
 volumeNum = NodePath("Control/SettingsScreen/VolumeNum")
+windowButton = NodePath("Control/SettingsScreen/WindowButton")
+volumeSlider = NodePath("Control/SettingsScreen/VolumeSlider")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -23,8 +29,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="Start" type="Button" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_e76ay")
+
+[node name="Start" type="Button" parent="Control" groups=["buttons"]]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -36,8 +50,9 @@ offset_bottom = 282.251
 grow_horizontal = 2
 theme = ExtResource("2_udnh7")
 text = "Start"
+metadata/_edit_use_anchors_ = true
 
-[node name="Settings" type="Button" parent="Control"]
+[node name="Settings" type="Button" parent="Control" groups=["buttons"]]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -49,8 +64,9 @@ offset_bottom = 342.251
 grow_horizontal = 2
 theme = ExtResource("2_udnh7")
 text = "Settings"
+metadata/_edit_use_anchors_ = true
 
-[node name="Quit" type="Button" parent="Control"]
+[node name="Quit" type="Button" parent="Control" groups=["buttons"]]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -62,8 +78,9 @@ offset_bottom = 402.251
 grow_horizontal = 2
 theme = ExtResource("2_udnh7")
 text = "Quit"
+metadata/_edit_use_anchors_ = true
 
-[node name="Credits" type="Button" parent="Control"]
+[node name="Credits" type="Button" parent="Control" groups=["buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -77,6 +94,7 @@ grow_vertical = 0
 theme = ExtResource("2_udnh7")
 text = "Credits
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="CreditsScreen" type="NinePatchRect" parent="Control"]
 visible = false
@@ -103,17 +121,20 @@ offset_top = 16.0
 offset_right = 360.0
 offset_bottom = 382.0
 theme = ExtResource("2_udnh7")
-text = "Art:
+text = "
+
+Art:
      ADAM
 
 Code:
      Cameron
 
-Shoutout to my artist, he had no reason to help me but he still did, very appreciative of him."
+Backround:
+     Tiani"
 label_settings = SubResource("LabelSettings_3pobn")
 autowrap_mode = 3
 
-[node name="Credits" type="Button" parent="Control/CreditsScreen"]
+[node name="Credits" type="Button" parent="Control/CreditsScreen" groups=["buttons"]]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -127,22 +148,23 @@ text = "Close
 
 [node name="SettingsScreen" type="NinePatchRect" parent="Control"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -189.0
+anchors_preset = -1
+anchor_left = 0.430556
+anchor_top = 0.638889
+anchor_right = 0.430556
+anchor_bottom = 0.638889
+offset_left = -26.0
 offset_top = -219.0
 offset_right = 189.0
-offset_bottom = 180.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
 texture = ExtResource("2_cnyfk")
 region_rect = Rect2(364, 310, 100, 100)
+metadata/_edit_use_anchors_ = true
 
-[node name="Settings" type="Button" parent="Control/SettingsScreen"]
+[node name="Settings" type="Button" parent="Control/SettingsScreen" groups=["buttons"]]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -153,16 +175,17 @@ grow_horizontal = 0
 theme = ExtResource("2_xwp4e")
 text = "Close
 "
+metadata/_edit_use_anchors_ = true
 
-[node name="WindowButton" type="OptionButton" parent="Control/SettingsScreen"]
+[node name="WindowButton" type="OptionButton" parent="Control/SettingsScreen" groups=["buttons"]]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 15.0
-offset_top = -62.5
+offset_top = -42.0
 offset_right = 201.0
-offset_bottom = -19.5
+offset_bottom = 1.0
 grow_vertical = 2
 theme = ExtResource("2_xwp4e")
 item_count = 2
@@ -171,6 +194,7 @@ popup/item_0/text = "FullScreen"
 popup/item_0/id = 0
 popup/item_1/text = "Windowed"
 popup/item_1/id = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="VolumeSlider" type="HSlider" parent="Control/SettingsScreen"]
 layout_mode = 1
@@ -178,21 +202,42 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 15.0
-offset_top = -19.5
+offset_top = 22.5
 offset_right = 153.0
-offset_bottom = 22.5
+offset_bottom = 64.5
 grow_vertical = 2
 theme = ExtResource("2_xwp4e")
 value = 50.0
+metadata/_edit_use_anchors_ = true
 
 [node name="VolumeNum" type="Label" parent="Control/SettingsScreen"]
 layout_mode = 0
 offset_left = 161.0
-offset_top = 190.0
+offset_top = 148.0
 offset_right = 201.0
-offset_bottom = 213.0
+offset_bottom = 171.0
 theme = ExtResource("2_xwp4e")
 text = "50"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -262.0
+offset_right = -154.0
+offset_bottom = 23.0
+grow_horizontal = 2
+scale = Vector2(5, 5)
+theme = ExtResource("7_cd8la")
+text = "FISH FIGHT"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1qvxf")
+volume_db = -60.0
+autoplay = true
 
 [connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]

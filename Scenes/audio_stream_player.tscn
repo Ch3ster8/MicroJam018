@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6fhmu1mdv8ll"]
+
+[ext_resource type="AudioStream" uid="uid://cqj3ryuqn4s2v" path="res://Assets/mixkit-on-or-off-light-switch-tap-2585.wav" id="1_qv8o2"]
+[ext_resource type="Script" path="res://Scripts/AudioStreamer.gd" id="2_hxyho"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_qv8o2")
+volume_db = -50.0
+autoplay = true
+script = ExtResource("2_hxyho")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

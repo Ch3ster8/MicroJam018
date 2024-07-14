@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://b38502k2bgs4v"]
+
+[ext_resource type="Script" path="res://Scripts/electric.gd" id="1_ukmx3"]
+[ext_resource type="SpriteFrames" uid="uid://16sax07rc3fj" path="res://AdamsArt/electric.aseprite" id="2_wj2gk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gybym"]
+radius = 58.0086
+
+[sub_resource type="Animation" id="Animation_ht3yd"]
+length = 1.85
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.175, 0.35, 0.525, 0.7, 0.875, 1.05, 1.225, 1.4, 1.575, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2bfkd"]
+_data = {
+"default": SubResource("Animation_ht3yd")
+}
+
+[node name="Electric" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ukmx3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gybym")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.05208, 2.05208)
+sprite_frames = ExtResource("2_wj2gk")
+frame = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_2bfkd")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

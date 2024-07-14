@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://keqjs3o80knt"]
+
+[ext_resource type="PackedScene" uid="uid://dpehyqo2s76ty" path="res://Scenes/billy.tscn" id="1_epkv2"]
+[ext_resource type="Texture2D" uid="uid://cc0dth18tc2yw" path="res://Assets/PNG/1_game_background/1_game_background.png" id="1_xmh6u"]
+[ext_resource type="PackedScene" uid="uid://b3ckv3i35sqcr" path="res://Scenes/IngameUI.tscn" id="3_2dhso"]
+[ext_resource type="PackedScene" uid="uid://b1n228j0jdnke" path="res://Scenes/angler.tscn" id="4_c7uk2"]
+[ext_resource type="PackedScene" uid="uid://c4uy7qtcxydto" path="res://Scenes/clownfish.tscn" id="5_jmvxa"]
+[ext_resource type="Script" path="res://Scripts/Placement.gd" id="6_dyjll"]
+[ext_resource type="AudioStream" uid="uid://cjjf74alrl4gu" path="res://Assets/aquarium-sound-6891.mp3" id="7_3npyn"]
+[ext_resource type="AudioStream" uid="uid://7xrpywt7po4r" path="res://Assets/the-sound-of-water-drops-21095.mp3" id="8_afbuu"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pu5dn"]
+vertices = PackedVector2Array(5317, -3462, 5324, 2448, -5206, 2431, -5211, -3467)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5222, -3478, 5327, -3472, 5335, 2459, -5216, 2441)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41xae"]
+size = Vector2(303.622, 12666.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uj7px"]
+size = Vector2(252.622, 13070.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvvxm"]
+size = Vector2(22177.5, 146.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8k5v"]
+size = Vector2(23189.5, 146.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_852qm"]
+size = Vector2(16521, 7113)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6236.44, 2968.5)
+scale = Vector2(11.938, 11.938)
+texture = ExtResource("1_xmh6u")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_pu5dn")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_2dhso")]
+
+[node name="Billy" parent="." node_paths=PackedStringArray("progress", "scoreLabel", "checklist", "controls", "controlsLabel") instance=ExtResource("1_epkv2")]
+progress = NodePath("../CanvasLayer/Control/TextureProgressBar")
+scoreLabel = NodePath("../CanvasLayer/Control/Score")
+checklist = NodePath("../CanvasLayer/Control/CheckList/Label")
+controls = NodePath("../CanvasLayer/Control/Controls")
+controlsLabel = NodePath("../CanvasLayer/Control/Controls/Label")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(14456, 3592)
+shape = SubResource("RectangleShape2D_41xae")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-2586, 2927)
+shape = SubResource("RectangleShape2D_uj7px")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(7360.25, 6537)
+shape = SubResource("RectangleShape2D_dvvxm")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(6366, -950)
+shape = SubResource("RectangleShape2D_j8k5v")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("6_dyjll")
+anglerFish = ExtResource("4_c7uk2")
+clownFish = ExtResource("5_jmvxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5919.5, 2799.5)
+shape = SubResource("RectangleShape2D_852qm")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_3npyn")
+volume_db = -60.0
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_afbuu")
+volume_db = -50.0
+autoplay = true
+
+[editable path="CanvasLayer"]

@@ -1,6 +1,7 @@
 extends Node
 var actions = {}
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	for action in InputMap.get_actions():
 		var action_data = {
 			"dragging" : false,

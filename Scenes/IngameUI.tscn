@@ -1,28 +1,35 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3ckv3i35sqcr"]
+[gd_scene load_steps=22 format=3 uid="uid://b3ckv3i35sqcr"]
 
 [ext_resource type="Texture2D" uid="uid://dy8nig55q7tvn" path="res://Assets/ProgressBar/32x32/32x32 circle bar over.png" id="1_vi8vy"]
 [ext_resource type="Texture2D" uid="uid://cbvhlnv3xvhg0" path="res://Assets/ProgressBar/32x32/32x32 circle bar progress red.png" id="2_7huhd"]
+[ext_resource type="Texture2D" uid="uid://d00ws7wljnit4" path="res://FlatUI4/UIpack_vector.svg" id="5_1wfw8"]
 [ext_resource type="Theme" uid="uid://bb6vwl0h1flws" path="res://FlatUI4/kenneyUI-blue.tres" id="5_ic01h"]
+[ext_resource type="Script" path="res://Scripts/HideandShow.gd" id="6_6cqkf"]
+[ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://FlatUI4/kenneyUI-red.tres" id="6_f4bmo"]
+[ext_resource type="Theme" uid="uid://h1f7iqhh7ycb" path="res://FlatUI4/kenneyUI-yellow.tres" id="7_kolnx"]
+[ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://FlatUI4/kenneyUI.tres" id="7_ov8dt"]
 [ext_resource type="Script" path="res://Scripts/bubbles.gd" id="9_j0syp"]
 [ext_resource type="Texture2D" uid="uid://ri0nsg0ddcmi" path="res://AdamsArt/heart.png" id="10_q01i1"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_jinx7"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jdi0u"]
+font_size = 12
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8cydl"]
-load_path = "res://.godot/imported/BubbleAnimation1.png-b1364413586e5e9f15d881482e184620.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_80h8a"]
-load_path = "res://.godot/imported/BubbleAnimation2.png-7e7a953de0b50eeefd627039d8901674.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6fjty"]
-load_path = "res://.godot/imported/BubbleAnimation3.png-753553b58d4fa4fe7075d9f043f4a478.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dq18q"]
-load_path = "res://.godot/imported/BubbleAnimation4.png-f900a9dbff1b4513cead92b904720091.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_coos5"]
-load_path = "res://.godot/imported/BubbleAnimation5.png-39f5d84864f0249cf2ad6c24dc512d35.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k2iyo"]
-load_path = "res://.godot/imported/BubbleAnimation6.png-28c41d675d51850cc3cc928731bf76e7.ctex"
 
 [sub_resource type="Animation" id="Animation_o5vd1"]
 resource_name = "Bubbles"
@@ -123,6 +130,103 @@ offset_bottom = 69.9999
 grow_horizontal = 2
 texture = ExtResource("10_q01i1")
 
+[node name="CheckList" type="NinePatchRect" parent="Control" node_paths=PackedStringArray("button")]
+self_modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -167.0
+offset_bottom = 176.0
+grow_horizontal = 0
+mouse_filter = 0
+texture = ExtResource("5_1wfw8")
+region_rect = Rect2(364, 310, 100, 100)
+script = ExtResource("6_6cqkf")
+button = NodePath("../HideChecklist")
+
+[node name="Label" type="Label" parent="Control/CheckList"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 352.0
+offset_bottom = 372.0
+theme = ExtResource("7_ov8dt")
+text = "CheckList:
+
+
+
+
+
+
+
+
+Snapper: 0/10
+PufferFish: 0/5
+Jellyfish: 0/2
+Shark: 0/1"
+label_settings = SubResource("LabelSettings_jinx7")
+autowrap_mode = 3
+
+[node name="HideChecklist" type="Button" parent="Control" groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -51.0
+offset_right = 56.0
+offset_bottom = 42.251
+grow_horizontal = 0
+scale = Vector2(0.48, 0.48)
+theme = ExtResource("7_kolnx")
+text = "Hide"
+
+[node name="Controls" type="NinePatchRect" parent="Control" node_paths=PackedStringArray("button")]
+self_modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 1
+offset_right = 167.0
+offset_bottom = 176.0
+mouse_filter = 0
+texture = ExtResource("5_1wfw8")
+region_rect = Rect2(364, 310, 100, 100)
+script = ExtResource("6_6cqkf")
+button = NodePath("../../HideControls")
+
+[node name="Label" type="Label" parent="Control/Controls"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 163.0
+offset_bottom = 371.0
+theme = ExtResource("6_f4bmo")
+text = "                     Controls:
+
+
+WASD:
+    Move
+LeftClick:
+    Attack
+🔒Shift/Space:
+     Dash
+🔒RightClick:
+    Scream
+"
+label_settings = SubResource("LabelSettings_jdi0u")
+autowrap_mode = 3
+
+[node name="HideControls" type="Button" parent="." groups=["buttons"]]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1152.0
+offset_right = -1045.0
+offset_bottom = 42.251
+grow_horizontal = 0
+scale = Vector2(0.48, 0.48)
+theme = ExtResource("7_kolnx")
+text = "Hide"
+
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
 anchors_preset = 15
@@ -137,3 +241,6 @@ libraries = {
 "": SubResource("AnimationLibrary_xfxhk")
 }
 script = ExtResource("9_j0syp")
+
+[connection signal="pressed" from="Control/HideChecklist" to="Control/CheckList" method="_on_hide_checklist_pressed"]
+[connection signal="pressed" from="HideControls" to="Control/Controls" method="_on_hide_checklist_pressed"]

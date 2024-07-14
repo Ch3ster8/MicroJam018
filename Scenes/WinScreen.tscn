@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg0gy6hwbw8ah"]
+
+[ext_resource type="Texture2D" uid="uid://djn8joccwfh3t" path="res://AdamsArt/Untitled_Artwork.png" id="1_355pd"]
+[ext_resource type="Texture2D" uid="uid://d00ws7wljnit4" path="res://FlatUI4/UIpack_vector.svg" id="1_opi81"]
+[ext_resource type="Theme" uid="uid://h1f7iqhh7ycb" path="res://FlatUI4/kenneyUI-yellow.tres" id="2_qmg2g"]
+[ext_resource type="Script" path="res://Scripts/WinScreen.gd" id="2_sfw7a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m64b1"]
+font_size = 51
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.001
+anchor_top = 0.002
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.152
+offset_top = -1.296
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_355pd")
+expand_mode = 1
+
+[node name="WinScreen" type="NinePatchRect" parent="." node_paths=PackedStringArray("label")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.546
+anchor_right = 0.525
+anchor_bottom = 0.546
+offset_left = -108.8
+offset_top = -166.758
+offset_right = 269.201
+offset_bottom = 232.243
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.575, 0.575)
+mouse_filter = 0
+texture = ExtResource("1_opi81")
+region_rect = Rect2(364, 310, 100, 100)
+script = ExtResource("2_sfw7a")
+label = NodePath("Label")
+
+[node name="Settings1" type="Button" parent="WinScreen" groups=["buttons"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.662
+offset_top = -42.251
+offset_right = 53.662
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_qmg2g")
+text = "Menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_right = 158.0
+offset_bottom = 447.0
+grow_horizontal = 2
+text = "Snapper: 
+Pufferfish:
+Jellyfish:
+Shark:
+Score:"
+label_settings = SubResource("LabelSettings_m64b1")
+
+[connection signal="pressed" from="WinScreen/Settings1" to="WinScreen" method="_on_settings_1_pressed"]

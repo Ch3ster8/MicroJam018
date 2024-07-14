@@ -1,0 +1,172 @@
+[gd_scene load_steps=12 format=3 uid="uid://dtvqap7kgu5mb"]
+
+[ext_resource type="Script" path="res://Scripts/pufferfish.gd" id="1_f7eqi"]
+[ext_resource type="SpriteFrames" uid="uid://f4ea4n2hjokg" path="res://AdamsArt/pugffish.aseprite" id="2_a6yrl"]
+[ext_resource type="PackedScene" uid="uid://dtc11lmi1rgsx" path="res://Scenes/movement.tscn" id="3_tcg4r"]
+[ext_resource type="PackedScene" uid="uid://2j6h8mx3qiba" path="res://Scenes/navigation.tscn" id="4_g8n6q"]
+[ext_resource type="PackedScene" uid="uid://c3s5a1806wp1f" path="res://Scenes/blood_effect.tscn" id="6_iw1te"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f23iu"]
+radius = 94.0332
+
+[sub_resource type="Animation" id="Animation_0hqm8"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["swim"]
+}
+
+[sub_resource type="Animation" id="Animation_24jxm"]
+resource_name = "Bite"
+length = 6.72
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.67, 6.17, 6.42, 6.67),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["inflation"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"checkfirstbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}, {
+"args": [],
+"method": &"checkbite"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_txi4t"]
+_data = {
+"Bite": SubResource("Animation_24jxm"),
+"swim": SubResource("Animation_0hqm8")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j12c6"]
+size = Vector2(1523.5, 1387.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t54mj"]
+radius = 427.169
+
+[node name="PufferFish" type="CharacterBody2D" node_paths=PackedStringArray("biteAnim", "bitearea") groups=["pufferfish"]]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_f7eqi")
+biteCooldown = 10
+biteAnim = NodePath("Sprite/AnimationPlayer")
+Health = 120
+bitearea = NodePath("BiteArea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 17.5)
+shape = SubResource("CircleShape2D_f23iu")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(6.495, 6.495)
+sprite_frames = ExtResource("2_a6yrl")
+animation = &"inflation"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_txi4t")
+}
+
+[node name="Movement" parent="." instance=ExtResource("3_tcg4r")]
+speed = 300
+acceleration = 30.0
+deceleration = 5.0
+
+[node name="Navigation" parent="." node_paths=PackedStringArray("user") instance=ExtResource("4_g8n6q")]
+user = NodePath("..")
+c_movementpath = NodePath("../Movement")
+steering_power = 0.7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation"]
+shape = SubResource("RectangleShape2D_j12c6")
+
+[node name="BiteArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
+shape = SubResource("CircleShape2D_t54mj")
+
+[node name="BloodEffect" parent="." instance=ExtResource("6_iw1te")]
+
+[connection signal="body_entered" from="BiteArea" to="." method="_on_bite_area_body_entered"]

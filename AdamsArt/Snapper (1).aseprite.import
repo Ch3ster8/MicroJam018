@@ -1,0 +1,18 @@
+[remap]
+
+importer="aseprite_wizard.plugin"
+type="SpriteFrames"
+uid="uid://b8nfknaxfyfad"
+path="res://.godot/imported/Snapper (1).aseprite-e0aecd4dd03d2b329b56f108b059e158.res"
+
+[deps]
+
+source_file="res://AdamsArt/Snapper (1).aseprite"
+dest_files=["res://.godot/imported/Snapper (1).aseprite-e0aecd4dd03d2b329b56f108b059e158.res"]
+
+[params]
+
+split_layers=false
+exclude_layers_pattern=""
+only_visible_layers=true
+sheet_type="Strip"

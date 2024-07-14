@@ -1,11 +1,24 @@
 extends Area2D
 @export var anglerFish : PackedScene
-@export var clownFish : PackedScene
-@onready var fish := [anglerFish, clownFish]
+@export var snapper : PackedScene
+@export var pufferFish : PackedScene
+@onready var fish := [anglerFish, snapper, snapper, snapper, pufferFish]
 
 func _ready():
-	for x in 50:
+	for x in 35:
 		var instant = fish.pick_random().instantiate()
+		instant.position = get_placement_pos(global_position, get_child(0).get_shape().size, Vector2(50, 50), true)
+		add_child(instant)
+	for x in 5:
+		var instant = snapper.instantiate()
+		instant.position = get_placement_pos(global_position, get_child(0).get_shape().size, Vector2(50, 50), true)
+		add_child(instant)
+	for x in 2:
+		var instant = anglerFish.instantiate()
+		instant.position = get_placement_pos(global_position, get_child(0).get_shape().size, Vector2(50, 50), true)
+		add_child(instant)
+	for x in 5:
+		var instant = pufferFish.instantiate()
 		instant.position = get_placement_pos(global_position, get_child(0).get_shape().size, Vector2(50, 50), true)
 		add_child(instant)
 func get_placement_pos(area_pos: Vector2, area_size: Vector2, obj_size: Vector2, including_edges: bool = false) -> Vector2:
